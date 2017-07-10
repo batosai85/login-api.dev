@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+     DocumentRoot "D:/programs/xxapm/htdocs/login_api"
+     ServerName login-api.dev
+</VirtualHost>
