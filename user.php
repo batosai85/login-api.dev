@@ -2,7 +2,7 @@
     session_start();
     $email = $_SESSION["email"];
     if ($email === '') {
-        header("Location:  http://login-api.dev/facebook_api.php");
+       // header("Location:  http://login-api.dev/facebook_api.php");
     }
 ?>
 <!doctype html>
@@ -56,19 +56,22 @@
     }
 </script>
 <script>
-    $.ajax({
-        type : "GET",
-        url : "get.php",
-        success : function(data){
-            var user = JSON.parse(data);
-            for (var prop in user) {
-             $(".bio").append("<li><h3>"+ prop + " : " + user[prop] + "</h3></li>");
-            }
-        },
-        error : function(err){
-            alert("err");
-        }
-    })
+    var fb_user = '<?php echo $_SESSION["email"];?>';
+     if(fb_user.length  > 0) {
+         $.ajax({
+             type: "GET",
+             url: "get.php",
+             success: function (data) {
+                 var user = JSON.parse(data);
+                 for (var prop in user) {
+                     $(".bio").append("<li><h3>" + prop + " : " + user[prop] + "</h3></li>");
+                 }
+             },
+             error: function (err) {
+                 alert("err");
+             }
+         })
+     }
 </script>
  <div style="margin:0 auto; width:40%;text-align:center;padding:50px;">
      <ul class="bio" style="list-style: none;"></ul>
